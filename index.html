@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Ti, Mamá</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;400;600&family=Parisienne&family=Sacramento&family=Roboto:wght@300;400;700&display=swap');
+
+        
+        :root {
+            --primary-color: #ff85a2;
+            --secondary-color: #ffd5e5;
+            --accent-color: #ff4081;
+            --text-color: #333;
+            --light-text: #fff;
+            --background-color: #fff0f5;
+            --heart-color: #ff4081;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+        
+        /* Animación para hacer aparecer elementos */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes floatAnimation {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes colorChange {
+            0% { color: var(--primary-color); }
+            50% { color: var(--accent-color); }
+            100% { color: var(--primary-color); }
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+        }
+        
+        /* Header y portada */
+        header {
+            height: 100vh;
+            background: linear-gradient(rgba(255, 133, 162, 0.8), rgba(255, 213, 229, 0.8)), url('/api/placeholder/800/600') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--light-text);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .heart {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff4081'%3E%3Cpath d='M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z'/%3E%3C/svg%3E") no-repeat center/contain;
+            opacity: 0.8;
+            animation: floatAnimation 6s infinite ease-in-out;
+            filter: drop-shadow(0 0 5px rgba(255, 64, 129, 0.7));
+        }
+        
+        .sparkles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 800 800'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='1'%3E%3Cpath d='M769 229L1037 260.9M927 880L731 737 520 660 309 538 40 599 295 764 126.5 879.5 40 599-197 493 102 382-31 229 126.5 79.5-69-63'/%3E%3Cpath d='M-31 229L237 261 390 382 603 493 308.5 537.5 101.5 381.5M370 905L295 764'/%3E%3Cpath d='M520 660L578 842 731 737 840 599 603 493 520 660 295 764 40 599 102 382 520 660 295 764'/%3E%3Cpath d='M520-140L578.5 42.5 731-63M603 493L539 269 237 261 370 105M902 382L539 269M390 382L102 382'/%3E%3Cpath d='M-222 42L126.5 79.5 370 105 539 269 577.5 41.5 927 80 769 229 902 382 603 493 731 737M295-36L577.5 41.5M578 842L295 764M40-201L127 80M102 382L-261 269'/%3E%3C/g%3E%3Cg fill='%23ffffff'%3E%3Ccircle cx='769' cy='229' r='5'/%3E%3Ccircle cx='539' cy='269' r='5'/%3E%3Ccircle cx='603' cy='493' r='5'/%3E%3Ccircle cx='731' cy='737' r='5'/%3E%3Ccircle cx='520' cy='660' r='5'/%3E%3Ccircle cx='309' cy='538' r='5'/%3E%3Ccircle cx='295' cy='764' r='5'/%3E%3Ccircle cx='40' cy='599' r='5'/%3E%3Ccircle cx='102' cy='382' r='5'/%3E%3Ccircle cx='127' cy='80' r='5'/%3E%3Ccircle cx='370' cy='105' r='5'/%3E%3Ccircle cx='578' cy='42' r='5'/%3E%3Ccircle cx='237' cy='261' r='5'/%3E%3Ccircle cx='390' cy='382' r='5'/%3E%3C/g%3E%3C/svg%3E");
+            z-index: 0;
+            opacity: 0.2;
+            animation: sparkle 20s infinite linear;
+        }
+        
+        .title {
+            font-family: 'Sacramento', cursive;
+            font-size: 6rem;
+            margin-bottom: 20px;
+            animation: heartbeat 2s infinite, colorChange 4s infinite;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 255, 255, 0.5);
+            z-index: 2;
+            background: linear-gradient(45deg, #ff4081, #ff85a2, #ff4081);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.3));
+        }
+        
+        .subtitle {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            animation: fadeIn 2s ease forwards;
+            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
+            z-index: 2;
+        }
+        
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            animation: floatAnimation 2s infinite ease-in-out;
+            cursor: pointer;
+        }
+        
+        .scroll-down i {
+            font-size: 2rem;
+        }
+        
+        /* Menú de navegación */
+        nav {
+            background-color: var(--primary-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            position: relative;
+        }
+        
+        .nav-links a {
+            display: block;
+            text-decoration: none;
+            color: var(--light-text);
+            padding: 20px 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            background-color: var(--accent-color);
+        }
+        
+        .nav-links a.active {
+            background-color: var(--accent-color);
+        }
+        
+        /* Secciones principales */
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s ease;
+        }
+        
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .section-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--primary-color);
+        }
+        
+        /* Sección 1: Carta para mamá */
+        .letter-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 0 0 30px rgba(255, 64, 129, 0.1);
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .letter-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(255, 133, 162, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        .letter-container::after {
+            content: "♥";
+            position: absolute;
+            font-size: 150px;
+            opacity: 0.03;
+            bottom: -30px;
+            right: -10px;
+            transform: rotate(-10deg);
+            font-family: 'Times New Roman', serif;
+            color: var(--accent-color);
+        }
+        
+        .letter {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.6rem;
+            line-height: 1.9;
+            text-align: center;
+            color: #555;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .letter p {
+            margin-bottom: 25px;
+        }
+        
+        .letter p:first-of-type {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        
+        .letter p em {
+            color: var(--accent-color);
+            font-style: normal;
+            font-weight: bold;
+        }
+        
+        .signature {
+            font-size: 1.8rem;
+            text-align: right;
+            margin-top: 50px;
+            color: var(--accent-color);
+        }
+        
+        /* Sección 2: Poemas */
+        .poems-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .poem {
+            background-color: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08), 0 0 15px rgba(255, 133, 162, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 133, 162, 0.2);
+        }
+        
+        .poem::before {
+            content: "❝";
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 60px;
+            color: rgba(255, 133, 162, 0.1);
+            font-family: 'Georgia', serif;
+        }
+        
+        .poem::after {
+            content: "❞";
+            position: absolute;
+            bottom: -15px;
+            right: 10px;
+            font-size: 60px;
+            color: rgba(255, 133, 162, 0.1);
+            font-family: 'Georgia', serif;
+        }
+        
+        .poem:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1), 0 0 20px rgba(255, 133, 162, 0.2);
+            border-color: rgba(255, 133, 162, 0.4);
+        }
+        
+        .poem p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            font-style: italic;
+            color: #444;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .poem .author {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.4rem;
+            text-align: right;
+            color: var(--accent-color);
+            position: relative;
+            z-index: 1;
+            text-shadow: 1px 1px 1px rgba(255, 133, 162, 0.1);
+        }
+        
+        /* Sección 3: Felicitaciones y fotos */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin: 80px 0;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            aspect-ratio: 3/5;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        /* Video de YouTube */
+        .video-container {
+            margin-top: 60px;
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* Proporción 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Mensaje final */
+        .final-message {
+background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+padding: 60px 20px;
+text-align: center;
+color: var(--light-text);
+margin-top: 80px;
+border-radius: 20px; /* ← Esto le da esquinas redondeadas */
+}
+        
+        .final-message h2 {
+            font-family: 'Parisienne', cursive;
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .final-message p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary-color);
+            text-align: center;
+            padding: 20px;
+            color: var(--accent-color);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 3.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .nav-links a {
+                padding: 15px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .letter {
+                font-size: 1.2rem;
+            }
+            
+            .poems-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Portada interactiva -->
+    <header id="home">
+        <div class="floating-hearts" id="hearts"></div>
+        <h1 class="title">Para Tí, Mamá</h1>
+        <h2 class="subtitle">Con todo nuestro amor, Elizabeth y Denilson</h2>
+        <div class="scroll-down" id="scrollDown">
+            ↓
+        </div>
+    </header>
+    
+    <!-- Menú de navegación -->
+    <nav>
+        <ul class="nav-links">
+            <li><a href="#home" class="active">Inicio</a></li>
+            <li><a href="#carta">Carta</a></li>
+            <li><a href="#poemas">Poemas</a></li>
+            <li><a href="#felicitaciones">Felicitaciones</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Sección 1: Carta para mamá -->
+    <section id="carta">
+        <h2 class="section-title">Una Carta para Ti</h2>
+        <div class="letter-container">
+            <div class="letter">
+                <p>Mi dulce y querida Mamita Carmen,</p>
+                <p>Mientras escribimos estas líneas con el corazón en la mano, nos separan muchos kilómetros, pero sentimos tu amor más cerca que nunca. A veces, esta distancia física nos hace valorar aún más los lazos invisibles que nos unen, esos hilos de amor que no conocen de fronteras ni de tiempo, siempre conectándonos contigo, <em>madrecita adorada</em>.</p>
+                <p>¿Recuerdas, mamita linda, cuando éramos pequeños y nos acurrucábamos en tu regazo pensando que no había lugar más seguro en el mundo? Teníamos razón. No existe refugio más cálido que tus brazos, ni melodía más reconfortante que tus palabras susurradas. Aunque hoy estudiemos lejos, llevamos tu dulce voz en nuestros pensamientos, como un faro que nos guía, nos aconseja, y nos recuerda siempre de dónde venimos y lo mucho que somos amados.</p>
+                <p>Madrecita del alma, queremos que sepas que cada pequeño triunfo, cada logro que alcanzamos lleva tu nombre escrito con letras de oro. Cada vez que enfrentamos un desafío y lo superamos, es tu rostro el que vemos, recordando cómo nos enseñaste a no rendirnos jamás, a seguir adelante con la frente en alto incluso cuando el camino parece imposible. Tu inmensa fortaleza ha sido nuestra inspiración, tu infinita valentía nuestro modelo a seguir.</p>
+                <p>No ha sido nada fácil estar lejos de ti, mamita querida. Extrañamos profundamente tus comiditas preparadas con tanto amor, tus consejos dados en el momento justo, tu risa cristalina que ilumina hasta el rincón más oscuro, incluso extrañamos esos regañitos que siempre han sido con la tierna intención de hacernos mejores personas. Pero en nuestro corazón sabemos que esta distancia es solo temporal y que cada paso que damos en nuestra formación nos acerca más a convertirnos en esas personas extraordinarias que tú siempre has visto en nosotros, incluso cuando nosotros mismos no podíamos vernos con tus ojos de amor.</p>
+                <p>Gracias, mamita del corazón, por todos los sacrificios inmensos que has hecho por nosotros, muchos de los cuales quizás nunca lleguemos a conocer completamente. Gracias por poner nuestros sueños por encima de los tuyos, por esas largas noches en vela cuando estábamos enfermitos, por trabajar sin descanso para darnos siempre lo mejor, por creer ciegamente en nosotros cuando ni siquiera nosotros creíamos en nuestras propias capacidades.</p>
+                <p>Te prometemos desde lo más profundo de nuestro ser que todo valdrá la pena, madrecita bella. Cada lágrima que has derramado por nosotros, cada preocupación que ha cruzado tu mente mientras estamos lejos, se transformará en el más grande orgullo y la más pura alegría. Estamos construyendo nuestro camino con las herramientas de amor que nos diste, pero nunca, jamás olvidamos que fuiste tú quien nos enseñó a dar los primeros pasitos en la vida.</p>
+                <p>Te amamos con todo nuestro corazón e infinitamente más allá, mamita Carmen. Hoy, mañana y por toda la eternidad, nuestro amor por ti solo crece cada día.</p>
+                <div class="signature">Con todo el amor de nuestros corazones,<br>Tus hijitos, Elizabeth y Denilson</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Sección 2: Poemas -->
+    <section id="poemas">
+        <h2 class="section-title">Poemas para una Madre Especial</h2>
+        <div class="poems-container">
+            <div class="poem">
+                <p>"Mamita, son tus ojos dulces el espejo<br>
+                en que el amor más puro se mira cada día.<br>
+                Por tus manos tiernas cruza el universo entero,<br>
+                en tu regazo cálido duerme la eterna ternura,<br>
+                y en tu pecho amoroso se refugian mis recuerdos queridos.<br>
+                No existe distancia ni tiempo que separe<br>
+                lo que tu amor de madre ha unido para siempre."</p>
+                <div class="author">- Gabriela Mistral</div>
+            </div>
+            <div class="poem">
+                <p>"Madrecita, me alejaré de ti<br>
+                llevando tus enseñanzas para seguir tus pasos.<br>
+                Tu voz melodiosa viajará conmigo,<br>
+                resonando como el más dulce eco de montaña.<br>
+                Y cuando la noche oscura me sorprenda,<br>
+                tu amor infinito será mi estrella guía,<br>
+                tu recuerdo precioso, mi más cálido abrigo."</p>
+                <div class="author">- Pablo Neruda</div>
+            </div>
+            <div class="poem">
+                <p>"En el gran mapa de mi vida<br>
+                todos los caminos del corazón conducen a ti, mamita.<br>
+                Eres mi sagrado origen y mi bendito destino,<br>
+                principio luminoso y final dichoso de todo viaje.<br>
+                Tu amor incondicional es mi brújula y mi puerto seguro,<br>
+                y aunque navegue en mares distantes de tu abrazo,<br>
+                siempre, siempre regreso a tu amorosa orilla."</p>
+                <div class="author">- Octavio Paz</div>
+            </div>
+            <div class="poem">
+    <p>"En el jardín secreto de mi alma<br>
+    floreces, madrecita, como la rosa eterna.<br>
+    Tus palabras son semillas de esperanza,<br>
+    tu silencio, abrigo en las noches más frías.<br>
+    Aunque el tiempo y la distancia nos separen,<br>
+    tu amor es raíz que me sostiene<br>
+    y cielo que me cobija en cada paso."</p>
+    <div class="author">- Gabriela Mistral</div>
+</div>
+
+        </div>
+    </section>
+    
+    <!-- Sección 3: Felicitaciones y fotos -->
+    <section id="felicitaciones">
+        <h2 class="section-title">¡Feliz Día, Mamá!</h2>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="imagenes/TU_PRIMERA_FOTO.jpg" alt="Mamá Carmen">
+            </div>
+            <div class="gallery-item">
+                <img src="imagenes/TU_SEGUNDA_FOTO.jpg" alt="Mamá Carmen">
+            </div>
+            <div class="gallery-item">
+                <img src="imagenes/TU_TERCERA_FOTO.jpg" alt="Mamá Carmen">
+            </div>
+        </div>
+        
+        <!-- Video de YouTube -->
+        <div class="video-container">
+            <!-- Aquí puedes reemplazar el ID del video por el que desees -->
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/lxloDUtI-ak?si=jB7HFfsI7D4BFc3u" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        
+        <!-- Mensaje final -->
+        <div class="final-message">
+            <h2>Gracias por Todo, Mamá</h2>
+            <p>Carmen, no hay palabras suficientes para expresar lo que significas para nosotros. Tu amor incondicional nos ha dado alas para volar y raíces para saber siempre a dónde pertenecemos. En cada paso de nuestro camino estás presente, inspirándonos a ser mejores cada día. Te amamos más allá de lo que las palabras pueden expresar. ¡Feliz día de la madre, todos los días del año!</p>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <p>Con todo el amor del mundo, para la mejor mamá - Elizabeth y Denilson | 2025</p>
+    </footer>
+    
+    <script>
+        // Crear corazones flotantes
+        function createHearts() {
+            const hearts = document.getElementById('hearts');
+            const numberOfHearts = 30;
+            
+            for (let i = 0; i < numberOfHearts; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                
+                // Posición aleatoria
+                const left = Math.random() * 100;
+                const top = Math.random() * 100;
+                heart.style.left = `${left}%`;
+                heart.style.top = `${top}%`;
+                
+                // Tamaño aleatorio
+                const size = Math.random() * 20 + 15;
+                heart.style.width = `${size}px`;
+                heart.style.height = `${size}px`;
+                
+                // Duración de animación aleatoria
+                const duration = Math.random() * 6 + 4;
+                heart.style.animationDuration = `${duration}s`;
+                
+                // Retraso aleatorio
+                const delay = Math.random() * 5;
+                heart.style.animationDelay = `${delay}s`;
+                
+                hearts.appendChild(heart);
+            }
+        }
+        
+        // Manejar navegación suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelectorAll('.nav-links a').forEach(link => {
+                    link.classList.remove('active');
+                });
+                
+                this.classList.add('active');
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Manejar botón de desplazamiento
+        document.getElementById('scrollDown').addEventListener('click', function() {
+            document.querySelector('#carta').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+        
+        // Aparecer secciones al hacer scroll
+        const sections = document.querySelectorAll('section');
+        
+        function checkSections() {
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (sectionTop < windowHeight * 0.8) {
+                    section.classList.add('visible');
+                }
+            });
+        }
+        
+        // Actualizar navegación activa al hacer scroll
+        function updateActiveNav() {
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                
+                if (sectionTop < window.innerHeight / 2) {
+                    currentSection = '#' + section.getAttribute('id');
+                }
+            });
+            
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === currentSection) {
+                    link.classList.add('active');
+                }
+                
+                // Si estamos en la parte superior, activar el enlace de inicio
+                if (window.scrollY < 100) {
+                    document.querySelector('a[href="#home"]').classList.add('active');
+                }
+            });
+        }
+        
+        // Inicializar la página
+        window.addEventListener('load', function() {
+            createHearts();
+            checkSections();
+            
+            window.addEventListener('scroll', function() {
+                checkSections();
+                updateActiveNav();
+            });
+        });
+    </script>
+</body>
+</html>
